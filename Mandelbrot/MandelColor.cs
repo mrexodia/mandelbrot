@@ -16,13 +16,16 @@ namespace Mandelbrot
         {
             if (n == -1) //tends to infinite
                 return Color.Black;
-            int a = 0;
-            int r = 0;
-            int g = 0;
-            int b = 0;
+            //scale n to 255
             double mul = 255 / (max - 1);
             n = (int)(mul * n);
-            return Color.FromArgb(255, r + n, g, b);
+
+            //calculate ARGB value
+            int a = 255 - n;
+            int r = 0;
+            int g = 0;
+            int b = 128;
+            return Color.FromArgb(a, r, g, b);
         }
     }
 }
