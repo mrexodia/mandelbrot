@@ -19,15 +19,26 @@ namespace Mandelbrot
         {
             InitializeComponent();
             mandelPanel.Paint += mandelPanel_Paint;
-            mandelPanel.MouseMove += mandelPanel_MouseMove;
+            mandelPanel.MouseClick += mandelPanel_MouseClick;
+            midden = new Point(mandelPanel.Width / 2 + 50, mandelPanel.Height / 2);
+        }
+
+        void mandelPanel_MouseClick(object sender, MouseEventArgs e)
+        {
+            double ratioMul = 2;
+            Point click = mandelPanel.PointToClient(Cursor.Position);
+            int dx = (int)(midden.X + (mandelPanel.Width / 2 - click.X * ratioMul));
+            int dy = (int)(midden.Y + (mandelPanel.Height / 2 - click.Y * ratioMul));
+            scale /= ratioMul;
+            midden = new Point(midden.X + dx, midden.Y + dy);
+            mandelPanel.Invalidate();
         }
 
         void mandelPanel_MouseMove(object sender, MouseEventArgs e)
         {
             int w = mandelPanel.Width;
             int h = mandelPanel.Height;
-            Point m = new Point(w / 2, h / 2);
-            m.X += 50;
+            Point m = midden;
             MandelImage mandelImage = new MandelImage(w, h, m, scale);
             int n = mandelImage.getPixelNumber(e.X, e.Y);
             this.Text = String.Format("n: {0}", n);
@@ -38,8 +49,7 @@ namespace Mandelbrot
             Graphics g = e.Graphics;
             int w = mandelPanel.Width;
             int h = mandelPanel.Height;
-            Point m = new Point(w / 2, h / 2);
-            m.X += 50;
+            Point m = midden;
             MandelImage mandelImage = new MandelImage(w, h, m, scale);
             Bitmap bitmap = mandelImage.create();
             g.DrawImage(bitmap, 0, 0);
