@@ -51,7 +51,7 @@ namespace Mandelbrot
             int h = mandelPanel.Height;
             Point m = midden;
             MandelImage mandelImage = new MandelImage(w, h, m, scale);
-            Bitmap bitmap = mandelImage.create();
+            Bitmap bitmap = mandelImage.create(new BlueAlpha());
             g.DrawImage(bitmap, 0, 0);
         }
     }

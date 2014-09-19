@@ -7,12 +7,14 @@ using System.Drawing;
 
 namespace Mandelbrot
 {
-    class MandelColor
+    public abstract class MandelColor
     {
-        public static int min;
-        public static int max;
+        public abstract Color get(int n, int max);
+    }
 
-        public static Color get(int n, int max)
+    public class BlueAlpha : MandelColor
+    {
+        public override Color get(int n, int max)
         {
             if (n == -1) //tends to infinite
                 return Color.Black;

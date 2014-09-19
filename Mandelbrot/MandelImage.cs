@@ -34,7 +34,7 @@ namespace Mandelbrot
             return mNumber.calculate(new MandelPoint(maxDistance), x * scale, y * scale);
         }
 
-        public Bitmap create()
+        public Bitmap create(MandelColor color)
         {
             //declare some required variables
             Bitmap mandelBitmap = new Bitmap(w, h);
@@ -45,7 +45,7 @@ namespace Mandelbrot
                 for (int j = 0; j < h; j++)
                 {
                     int n = getPixelNumber(i, j);
-                    mandelBitmap.SetPixel(i, j, MandelColor.get(n, recurseCount));
+                    mandelBitmap.SetPixel(i, j, color.get(n, recurseCount));
                 }
             }
 
