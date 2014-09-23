@@ -16,7 +16,7 @@ namespace Mandelbrot
         int recurseCount;
         double maxDistance;
 
-        public MandelImage(int w, int h, Point m, double scale, int recurseCount = 70, double maxDistance = double.MaxValue)
+        public MandelImage(int w, int h, Point m, double scale, int recurseCount = 600, double maxDistance = 2)
         {
             this.w = w;
             this.h = h;
@@ -26,7 +26,7 @@ namespace Mandelbrot
             this.maxDistance = maxDistance;
         }
 
-        public int getPixelNumber(double x, double y)
+        public int getPixelMandel(double x, double y)
         {
             MandelNumber mNumber = new MandelNumber(recurseCount);
             x -= m.X;
@@ -44,7 +44,7 @@ namespace Mandelbrot
             {
                 for (int j = 0; j < h; j++)
                 {
-                    int n = getPixelNumber(i, j);
+                    int n = getPixelMandel(i, j);
                     mandelBitmap.SetPixel(i, j, color.get(n, recurseCount));
                 }
             }

@@ -23,7 +23,7 @@ namespace Mandelbrot
 
         public bool IsInBounds()
         {
-            return Math.Sqrt(Math.Pow(a, 2) + Math.Pow(b, 2)) <= limit;
+            return Math.Sqrt(a * a + b * b) <= limit;
         }
     }
 

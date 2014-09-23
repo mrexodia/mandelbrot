@@ -30,4 +30,15 @@ namespace Mandelbrot
             return Color.FromArgb(a, r, g, b);
         }
     }
+
+    public class RandomColor : MandelColor
+    {
+        public override Color get(int n, int max)
+        {
+            if (n == -1)
+                return Color.Black;
+            Random ran = new Random(n * max);
+            return Color.FromArgb(ran.Next(0, 255), ran.Next(0, 255), ran.Next(0, 255));
+        }
+    }
 }
