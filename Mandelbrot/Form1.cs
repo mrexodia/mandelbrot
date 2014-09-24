@@ -12,10 +12,11 @@ namespace Mandelbrot
 {
     public partial class Form1 : Form
     {
-        Point midden;
+        Point middle;
         int recurseCount = 100;
         MandelColor color;
         double scale = 0.01;
+        Bitmap mandelBitmap;
 
         struct MandelState
         {
@@ -34,38 +35,63 @@ namespace Mandelbrot
         public Form1()
         {
             InitializeComponent();
+            //register event handlers
             mandelPanel.Paint += mandelPanel_Paint;
             mandelPanel.MouseClick += mandelPanel_MouseClick;
             mandelPanel.MouseMove += mandelPanel_MouseMove;
-            midden = new Point(mandelPanel.Width / 2 + 50, mandelPanel.Height / 2);
+            //initialize variables
+            middle = new Point(mandelPanel.Width / 2 + 50, mandelPanel.Height / 2);
             color = new RandomColor();
+            refreshImage();
+            fillTextFields();
+        }
+
+        void refreshImage()
+        {
+            int w = mandelPanel.Width;
+            int h = mandelPanel.Height;
+            Point m = middle;
+            MandelImage mandelImage = new MandelImage(w, h, m, scale, recurseCount);
+            mandelBitmap = mandelImage.create(color);
+        }
+
+        void fillTextFields()
+        {
+            //fill text fields with default
+            textBoxScale.Text = scale.ToString();
+            textBoxMax.Text = recurseCount.ToString();
+            textBoxMiddleX.Text = middle.X.ToString();
+            textBoxMiddleY.Text = middle.Y.ToString();
         }
 
         void mandelPanel_MouseClick(object sender, MouseEventArgs e)
         {
-            if(e.Button == MouseButtons.Left)
+            if (e.Button == MouseButtons.Left)
             {
-                MandelState state = new MandelState(midden, scale);
+                MandelState state = new MandelState(middle, scale);
                 stateList.Add(state);
                 double ratioMul = 2;
                 Point click = mandelPanel.PointToClient(Cursor.Position);
-                int dx = (int)(midden.X + (mandelPanel.Width / 2 - click.X * ratioMul));
-                int dy = (int)(midden.Y + (mandelPanel.Height / 2 - click.Y * ratioMul));
+                int dx = (int)(middle.X + (mandelPanel.Width / 2 - click.X * ratioMul));
+                int dy = (int)(middle.Y + (mandelPanel.Height / 2 - click.Y * ratioMul));
                 scale /= ratioMul;
-                midden = new Point(midden.X + dx, midden.Y + dy);
+                middle = new Point(middle.X + dx, middle.Y + dy);
             }
-            else if(e.Button == MouseButtons.Right)
+            else if (e.Button == MouseButtons.Right)
             {
                 try
                 {
                     scale = stateList.Last().scale;
-                    midden = stateList.Last().midden;
+                    middle = stateList.Last().midden;
                     stateList.Remove(stateList.Last());
                 }
                 catch
                 {
+                    return;
                 }
-            }            
+            }
+            refreshImage();
+            fillTextFields();
             mandelPanel.Invalidate();
         }
 
@@ -73,7 +99,7 @@ namespace Mandelbrot
         {
             int w = mandelPanel.Width;
             int h = mandelPanel.Height;
-            Point m = midden;
+            Point m = middle;
             MandelImage mandelImage = new MandelImage(w, h, m, scale, recurseCount);
             int n = mandelImage.getPixelMandel(e.X, e.Y);
             this.Text = String.Format("n: {0}", n);
@@ -81,18 +107,13 @@ namespace Mandelbrot
 
         void mandelPanel_Paint(object sender, PaintEventArgs e)
         {
-            Graphics g = e.Graphics;
-            int w = mandelPanel.Width;
-            int h = mandelPanel.Height;
-            Point m = midden;
-            MandelImage mandelImage = new MandelImage(w, h, m, scale, recurseCount);
-            Bitmap bitmap = mandelImage.create(color);
-            g.DrawImage(bitmap, 0, 0);
+            e.Graphics.DrawImage(mandelBitmap, 0, 0);
         }
 
         private void buttonRefresh_Click(object sender, EventArgs e)
         {
-            //MessageBox.Show(String.Format("10: {0}", kd(10)));
+            refreshImage();
+            mandelPanel.Invalidate();
         }
     }
 }
