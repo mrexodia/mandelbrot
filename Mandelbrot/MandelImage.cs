@@ -26,12 +26,12 @@ namespace Mandelbrot
             this.maxDistance = maxDistance;
         }
 
-        public int getPixelMandel(double x, double y)
+        public int getPixelMandel(int x, int y)
         {
             MandelNumber mNumber = new MandelNumber(recurseCount);
             x -= m.X;
             y -= m.Y;
-            return mNumber.calculate(new MandelPoint(maxDistance), x * scale, y * scale);
+            return mNumber.calculate(new MandelPoint(), x * scale, y * scale);
         }
 
         public Bitmap create(MandelColor color)

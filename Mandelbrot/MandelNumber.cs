@@ -12,18 +12,17 @@ namespace Mandelbrot
     {
         public double a;
         public double b;
-        public double limit;
 
-        public MandelPoint(double limit = 2.0, double a = 0, double b = 0)
+        public MandelPoint(double a = 0, double b = 0)
         {
             this.a = a;
             this.b = b;
-            this.limit = limit;
         }
 
+        //check if the distance to (0,0) <= 2
         public bool IsInBounds()
         {
-            return Math.Sqrt(a * a + b * b) <= limit;
+            return a * a + b * b <= 4;
         }
     }
 
@@ -36,10 +35,10 @@ namespace Mandelbrot
             this.recurseCount = recurseCount;
         }
 
-        //transform a manel point
+        //transform a mandel point: f(a,b) = (a*a-b*b+x, 2*a*b+y)
         private static MandelPoint transform(MandelPoint pt, double x, double y)
         {
-            return new MandelPoint(pt.limit, pt.a * pt.a - pt.b * pt.b + x, 2 * pt.a * pt.b + y);
+            return new MandelPoint(pt.a * pt.a - pt.b * pt.b + x, 2 * pt.a * pt.b + y);
         }
 
         //recursively calculate the mandel number
