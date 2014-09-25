@@ -7,37 +7,43 @@ using System.Drawing;
 
 namespace Mandelbrot
 {
+    //Class that describes color in a Mandelbrot image
     public abstract class MandelColor
     {
+        public abstract string ToString();
+
         public abstract Color get(int n, int max);
     }
 
     public class BlueAlpha : MandelColor
     {
+        public override string ToString()
+        {
+            return "Transparent Blue";
+        }
+
         public override Color get(int n, int max)
         {
-            if (n == -1) //tends to infinite
-                return Color.Black;
-            //scale n to 255
-            double mul = 255 / (max - 1);
-            n = (int)(mul * n);
-
-            //calculate ARGB value
-            int a = 255 - n;
-            int r = 0;
-            int g = 0;
-            int b = 128;
-            return Color.FromArgb(a, r, g, b);
+            if (n == MandelNumber.INVALID)
+                return Color.Red;
+            Random ran = new Random(n);
+            int rgb = ran.Next(0, 255);
+            return Color.FromArgb(rgb, rgb, rgb);
         }
     }
 
     public class RandomColor : MandelColor
     {
+        public override string ToString()
+        {
+            return "Pseudo-Random";
+        }
+
         public override Color get(int n, int max)
         {
-            if (n == -1)
+            if (n == MandelNumber.INVALID)
                 return Color.Black;
-            Random ran = new Random(n * max);
+            Random ran = new Random(n);
             return Color.FromArgb(ran.Next(0, 255), ran.Next(0, 255), ran.Next(0, 255));
         }
     }

@@ -9,43 +9,46 @@ namespace Mandelbrot
 {
     public class MandelImage
     {
-        int w;
-        int h;
-        Point m;
-        double scale;
-        int recurseCount;
-        double maxDistance;
+        int width; //bitmap width
+        int height; //bitmap height
+        MandelPoint middle; //mandel image middle
+        double scale; //pixel -> mandel point scale
+        int maxLoop; //number of times to try calculating the mandel number
 
-        public MandelImage(int w, int h, Point m, double scale, int recurseCount = 600, double maxDistance = 2)
+        public MandelImage(int width, int height, MandelPoint middle, double scale, int maxLoop = 100)
         {
-            this.w = w;
-            this.h = h;
-            this.m = m;
+            this.width = width;
+            this.height = height;
+            this.middle = middle;
             this.scale = scale;
-            this.recurseCount = recurseCount;
-            this.maxDistance = maxDistance;
+            this.maxLoop = maxLoop;
         }
 
-        public int getPixelMandel(int x, int y)
+        //convert (x,y) in bitmap to (x,y) in mandelbrot image
+        public MandelPoint pixelToMandelPoint(int x, int y)
         {
-            MandelNumber mNumber = new MandelNumber(recurseCount);
-            x -= m.X;
-            y -= m.Y;
-            return mNumber.calculate(new MandelPoint(), x * scale, y * scale);
+            return new MandelPoint((x - width / 2) * scale + middle.a, (y - height / 2) * scale + middle.b);
+        }
+
+        //get the mandel number for a specified point in the mandelbrot image
+        public int mandelPointToNumber(MandelPoint point)
+        {
+            MandelNumber mandelNumber = new MandelNumber(maxLoop);
+            return mandelNumber.calculate(point);
         }
 
         public Bitmap create(MandelColor color)
         {
             //declare some required variables
-            Bitmap mandelBitmap = new Bitmap(w, h);
+            Bitmap mandelBitmap = new Bitmap(width, height);
 
             //go over every pixel in the bitmap
-            for (int i = 0; i < w; i++)
+            for (int x = 0; x < width; x++)
             {
-                for (int j = 0; j < h; j++)
+                for (int y = 0; y < height; y++)
                 {
-                    int n = getPixelMandel(i, j);
-                    mandelBitmap.SetPixel(i, j, color.get(n, recurseCount));
+                    int n = mandelPointToNumber(pixelToMandelPoint(x, y));
+                    mandelBitmap.SetPixel(x, y, color.get(n, maxLoop));
                 }
             }
 

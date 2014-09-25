@@ -12,24 +12,12 @@ namespace Mandelbrot
 {
     public partial class Form1 : Form
     {
-        Point middle;
-        int recurseCount = 100;
+        MandelPoint middle;
         MandelColor color;
-        double scale = 0.01;
+        MandelImage mandelImage;
         Bitmap mandelBitmap;
-
-        struct MandelState
-        {
-            public MandelState(Point midden, double scale)
-            {
-                this.midden = midden;
-                this.scale = scale;
-            }
-
-            public Point midden;
-            public double scale;
-        }
-
+        int maxLoop = 100;
+        double scale = 0.01;        
         List<MandelState> stateList = new List<MandelState>();
 
         public Form1()
@@ -40,69 +28,63 @@ namespace Mandelbrot
             mandelPanel.MouseClick += mandelPanel_MouseClick;
             mandelPanel.MouseMove += mandelPanel_MouseMove;
             //initialize variables
-            middle = new Point(mandelPanel.Width / 2 + 50, mandelPanel.Height / 2);
-            color = new RandomColor();
+            middle = new MandelPoint();
+            color = new BlueAlpha();
             refreshImage();
             fillTextFields();
         }
 
+        //method to regenerate the bitmap to display
         void refreshImage()
         {
-            int w = mandelPanel.Width;
-            int h = mandelPanel.Height;
-            Point m = middle;
-            MandelImage mandelImage = new MandelImage(w, h, m, scale, recurseCount);
+            mandelImage = new MandelImage(mandelPanel.Width, mandelPanel.Height, middle, scale, maxLoop);
             mandelBitmap = mandelImage.create(color);
+            mandelPanel.Invalidate();
         }
 
+        //method to update the text fields to the current values
         void fillTextFields()
         {
-            //fill text fields with default
             textBoxScale.Text = scale.ToString();
-            textBoxMax.Text = recurseCount.ToString();
-            textBoxMiddleX.Text = middle.X.ToString();
-            textBoxMiddleY.Text = middle.Y.ToString();
+            textBoxMax.Text = maxLoop.ToString();
+            textBoxMiddleX.Text = middle.a.ToString();
+            textBoxMiddleY.Text = middle.b.ToString();
         }
 
         void mandelPanel_MouseClick(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
+            if (e.Button == MouseButtons.Left) //zoom in
             {
-                MandelState state = new MandelState(middle, scale);
+                MandelState state = new MandelState(middle, scale, maxLoop);
                 stateList.Add(state);
-                double ratioMul = 2;
                 Point click = mandelPanel.PointToClient(Cursor.Position);
-                int dx = (int)(middle.X + (mandelPanel.Width / 2 - click.X * ratioMul));
-                int dy = (int)(middle.Y + (mandelPanel.Height / 2 - click.Y * ratioMul));
-                scale /= ratioMul;
-                middle = new Point(middle.X + dx, middle.Y + dy);
+                middle = mandelImage.pixelToMandelPoint(click.X, click.Y);
+                scale /= 2;
             }
-            else if (e.Button == MouseButtons.Right)
+            else if (e.Button == MouseButtons.Right) //zoom out
             {
                 try
                 {
                     scale = stateList.Last().scale;
-                    middle = stateList.Last().midden;
+                    middle = stateList.Last().middle;
+                    maxLoop = stateList.Last().maxLoop;
                     stateList.Remove(stateList.Last());
                 }
                 catch
                 {
-                    return;
+                    return; //don't refresh when there is no previous state
                 }
             }
             refreshImage();
             fillTextFields();
-            mandelPanel.Invalidate();
         }
 
         void mandelPanel_MouseMove(object sender, MouseEventArgs e)
         {
-            int w = mandelPanel.Width;
-            int h = mandelPanel.Height;
-            Point m = middle;
-            MandelImage mandelImage = new MandelImage(w, h, m, scale, recurseCount);
-            int n = mandelImage.getPixelMandel(e.X, e.Y);
-            this.Text = String.Format("n: {0}", n);
+            Point click = mandelPanel.PointToClient(Cursor.Position);
+            MandelPoint mandelPoint = mandelImage.pixelToMandelPoint(click.X, click.Y);
+            int n = mandelImage.mandelPointToNumber(mandelPoint);
+            this.Text = String.Format("({0}, {1}): {2}", mandelPoint.a, mandelPoint.b, n);
         }
 
         void mandelPanel_Paint(object sender, PaintEventArgs e)
@@ -112,8 +94,17 @@ namespace Mandelbrot
 
         private void buttonRefresh_Click(object sender, EventArgs e)
         {
-            refreshImage();
-            mandelPanel.Invalidate();
+            try
+            {
+                scale = double.Parse(textBoxScale.Text);
+                maxLoop = int.Parse(textBoxMax.Text);
+                middle = new MandelPoint(double.Parse(textBoxMiddleX.Text), double.Parse(textBoxMiddleY.Text));
+                refreshImage();
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("Invalid format used!", "Error");
+            }
         }
     }
 }
