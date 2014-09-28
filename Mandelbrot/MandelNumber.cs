@@ -27,7 +27,7 @@ namespace Mandelbrot
         public int calculate(MandelPoint point)
         {
             MandelPoint basePoint = new MandelPoint();
-            for (int i = 0; i < maxLoop; i++ )
+            for (int i = 0; i < maxLoop; i++)
             {
                 basePoint = transform(basePoint, point.a, point.b);
                 if (!basePoint.IsInBounds())

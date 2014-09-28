@@ -28,7 +28,7 @@ namespace Mandelbrot
                 return Color.Black;
             double scale = 255 / max;
             n = (int)(scale * n);
-            return Color.FromArgb(255-n, 0, 0, 50);
+            return Color.FromArgb(255 - n, 0, 0, 50);
         }
     }
 
