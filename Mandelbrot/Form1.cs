@@ -13,32 +13,46 @@ namespace Mandelbrot
     public partial class Form1 : Form
     {
         MandelPoint middle;
-        MandelColor color;
         MandelImage mandelImage;
         Bitmap mandelBitmap;
         int maxLoop = 100;
-        double scale = 0.01;        
+        double scale = 0.01;
         List<MandelState> stateList = new List<MandelState>();
+        List<MandelColor> colorList = new List<MandelColor>();
 
         public Form1()
         {
             InitializeComponent();
+
+            //add color filters
+            colorList.Add(new RandomColor());
+            colorList.Add(new BlueAlpha());
+            foreach (MandelColor color in colorList)
+                comboBoxColors.Items.Add(color.ToString());
+            comboBoxColors.SelectedItem = comboBoxColors.Items[0];
+
+            //initialize variables
+            middle = new MandelPoint();
+            refreshImage();
+            fillTextFields();
+
             //register event handlers
             mandelPanel.Paint += mandelPanel_Paint;
             mandelPanel.MouseClick += mandelPanel_MouseClick;
             mandelPanel.MouseMove += mandelPanel_MouseMove;
-            //initialize variables
-            middle = new MandelPoint();
-            color = new BlueAlpha();
+            comboBoxColors.SelectedIndexChanged += comboBoxColors_SelectedIndexChanged;
+        }
+
+        void comboBoxColors_SelectedIndexChanged(object sender, EventArgs e)
+        {
             refreshImage();
-            fillTextFields();
         }
 
         //method to regenerate the bitmap to display
         void refreshImage()
         {
             mandelImage = new MandelImage(mandelPanel.Width, mandelPanel.Height, middle, scale, maxLoop);
-            mandelBitmap = mandelImage.create(color);
+            mandelBitmap = mandelImage.create(colorList[comboBoxColors.SelectedIndex]);
             mandelPanel.Invalidate();
         }
 
@@ -63,17 +77,13 @@ namespace Mandelbrot
             }
             else if (e.Button == MouseButtons.Right) //zoom out
             {
-                try
-                {
-                    scale = stateList.Last().scale;
-                    middle = stateList.Last().middle;
-                    maxLoop = stateList.Last().maxLoop;
-                    stateList.Remove(stateList.Last());
-                }
-                catch
-                {
+                if (stateList.Count == 0)
                     return; //don't refresh when there is no previous state
-                }
+
+                scale = stateList.Last().scale;
+                middle = stateList.Last().middle;
+                maxLoop = stateList.Last().maxLoop;
+                stateList.Remove(stateList.Last());
             }
             refreshImage();
             fillTextFields();
@@ -101,7 +111,7 @@ namespace Mandelbrot
                 middle = new MandelPoint(double.Parse(textBoxMiddleX.Text), double.Parse(textBoxMiddleY.Text));
                 refreshImage();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show("Invalid format used!", "Error");
             }
