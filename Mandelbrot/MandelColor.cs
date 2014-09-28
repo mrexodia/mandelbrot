@@ -25,10 +25,10 @@ namespace Mandelbrot
         public override Color get(int n, int max)
         {
             if (n == MandelNumber.INVALID)
-                return Color.Red;
-            Random ran = new Random(n);
-            int rgb = ran.Next(0, 255);
-            return Color.FromArgb(rgb, rgb, rgb);
+                return Color.Black;
+            double scale = 255 / max;
+            n = (int)(scale * n);
+            return Color.FromArgb(255-n, 0, 0, 50);
         }
     }
 
