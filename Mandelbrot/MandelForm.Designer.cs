@@ -47,6 +47,7 @@
             // mandelPanel
             // 
             this.mandelPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.mandelPanel.Cursor = System.Windows.Forms.Cursors.Hand;
             this.mandelPanel.Location = new System.Drawing.Point(12, 12);
             this.mandelPanel.Name = "mandelPanel";
             this.mandelPanel.Size = new System.Drawing.Size(529, 441);
@@ -67,7 +68,7 @@
             this.textBoxMax.Location = new System.Drawing.Point(248, 490);
             this.textBoxMax.Name = "textBoxMax";
             this.textBoxMax.Size = new System.Drawing.Size(108, 20);
-            this.textBoxMax.TabIndex = 3;
+            this.textBoxMax.TabIndex = 7;
             // 
             // labelMax
             // 
@@ -92,7 +93,7 @@
             this.textBoxScale.Location = new System.Drawing.Point(248, 464);
             this.textBoxScale.Name = "textBoxScale";
             this.textBoxScale.Size = new System.Drawing.Size(108, 20);
-            this.textBoxScale.TabIndex = 5;
+            this.textBoxScale.TabIndex = 6;
             // 
             // label1
             // 
@@ -108,7 +109,7 @@
             this.textBoxMiddleY.Location = new System.Drawing.Point(420, 490);
             this.textBoxMiddleY.Name = "textBoxMiddleY";
             this.textBoxMiddleY.Size = new System.Drawing.Size(121, 20);
-            this.textBoxMiddleY.TabIndex = 7;
+            this.textBoxMiddleY.TabIndex = 9;
             // 
             // label2
             // 
@@ -124,7 +125,7 @@
             this.textBoxMiddleX.Location = new System.Drawing.Point(420, 464);
             this.textBoxMiddleX.Name = "textBoxMiddleX";
             this.textBoxMiddleX.Size = new System.Drawing.Size(121, 20);
-            this.textBoxMiddleX.TabIndex = 9;
+            this.textBoxMiddleX.TabIndex = 8;
             // 
             // comboBoxColors
             // 
@@ -133,7 +134,7 @@
             this.comboBoxColors.Location = new System.Drawing.Point(78, 491);
             this.comboBoxColors.Name = "comboBoxColors";
             this.comboBoxColors.Size = new System.Drawing.Size(121, 21);
-            this.comboBoxColors.TabIndex = 11;
+            this.comboBoxColors.TabIndex = 5;
             // 
             // label3
             // 
@@ -149,7 +150,7 @@
             this.buttonTeeth.Location = new System.Drawing.Point(78, 462);
             this.buttonTeeth.Name = "buttonTeeth";
             this.buttonTeeth.Size = new System.Drawing.Size(51, 23);
-            this.buttonTeeth.TabIndex = 13;
+            this.buttonTeeth.TabIndex = 3;
             this.buttonTeeth.Text = "Teeth";
             this.buttonTeeth.UseVisualStyleBackColor = true;
             this.buttonTeeth.Click += new System.EventHandler(this.buttonTeeth_Click);
@@ -159,7 +160,7 @@
             this.buttonSpace.Location = new System.Drawing.Point(135, 462);
             this.buttonSpace.Name = "buttonSpace";
             this.buttonSpace.Size = new System.Drawing.Size(64, 23);
-            this.buttonSpace.TabIndex = 14;
+            this.buttonSpace.TabIndex = 4;
             this.buttonSpace.Text = "Space";
             this.buttonSpace.UseVisualStyleBackColor = true;
             this.buttonSpace.Click += new System.EventHandler(this.buttonSpace_Click);
