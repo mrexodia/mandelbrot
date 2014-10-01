@@ -69,10 +69,12 @@ namespace Mandelbrot
         {
             if (e.Button == MouseButtons.Left) //zoom in
             {
+                //add current statee to list
                 MandelState state = new MandelState(middle, scale, maxLoop);
                 stateList.Add(state);
-                Point click = mandelPanel.PointToClient(Cursor.Position);
-                middle = mandelImage.pixelToMandelPoint(click.X, click.Y);
+
+                //calculate new middle + zoom
+                middle = mandelImage.pixelToMandelPoint(e.X, e.Y);
                 scale /= 2;
             }
             else if (e.Button == MouseButtons.Right) //zoom out
@@ -91,8 +93,8 @@ namespace Mandelbrot
 
         void mandelPanel_MouseMove(object sender, MouseEventArgs e)
         {
-            Point click = mandelPanel.PointToClient(Cursor.Position);
-            MandelPoint mandelPoint = mandelImage.pixelToMandelPoint(click.X, click.Y);
+            // display current position in graph
+            MandelPoint mandelPoint = mandelImage.pixelToMandelPoint(e.X, e.Y);
             int n = mandelImage.mandelPointToNumber(mandelPoint);
             this.Text = String.Format("({0}, {1}): {2}", mandelPoint.a, mandelPoint.b, n);
         }
