@@ -31,7 +31,7 @@ namespace Mandelbrot
             {
                 basePoint = transform(basePoint, point.a, point.b);
                 if (!basePoint.IsInBounds())
-                    return i;
+                    return i + 1;
             }
             return INVALID;
         }
