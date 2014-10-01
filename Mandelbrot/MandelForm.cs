@@ -111,7 +111,7 @@ namespace Mandelbrot
                 middle = new MandelPoint(double.Parse(textBoxMiddleX.Text), double.Parse(textBoxMiddleY.Text));
                 refreshImage();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 MessageBox.Show("Invalid format used!", "Error");
             }

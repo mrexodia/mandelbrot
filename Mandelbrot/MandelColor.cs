@@ -10,8 +10,6 @@ namespace Mandelbrot
     //Class that describes color in a Mandelbrot image
     public abstract class MandelColor
     {
-        public abstract string ToString();
-
         public abstract Color get(int n, int max);
     }
 
