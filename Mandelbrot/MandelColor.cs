@@ -71,4 +71,19 @@ namespace Mandelbrot
             return result;
         }
     }
+
+    public class Fire : MandelColor
+    {
+        public override string ToString()
+        {
+            return "Fire";
+        }
+
+        public override Color get(int n, int max)
+        {
+            if (n == MandelNumber.INVALID)
+                return Color.Black;
+            return Color.FromArgb(n % 256, 0, 0);
+        }
+    }
 }
