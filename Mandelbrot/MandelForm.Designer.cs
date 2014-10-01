@@ -40,6 +40,8 @@
             this.textBoxMiddleX = new System.Windows.Forms.TextBox();
             this.comboBoxColors = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
+            this.buttonTeeth = new System.Windows.Forms.Button();
+            this.buttonSpace = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // mandelPanel
@@ -47,14 +49,14 @@
             this.mandelPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.mandelPanel.Location = new System.Drawing.Point(12, 12);
             this.mandelPanel.Name = "mandelPanel";
-            this.mandelPanel.Size = new System.Drawing.Size(626, 441);
+            this.mandelPanel.Size = new System.Drawing.Size(529, 441);
             this.mandelPanel.TabIndex = 1;
             // 
             // buttonRefresh
             // 
-            this.buttonRefresh.Location = new System.Drawing.Point(12, 459);
+            this.buttonRefresh.Location = new System.Drawing.Point(12, 462);
             this.buttonRefresh.Name = "buttonRefresh";
-            this.buttonRefresh.Size = new System.Drawing.Size(75, 23);
+            this.buttonRefresh.Size = new System.Drawing.Size(60, 23);
             this.buttonRefresh.TabIndex = 2;
             this.buttonRefresh.Text = "&Refresh";
             this.buttonRefresh.UseVisualStyleBackColor = true;
@@ -62,7 +64,7 @@
             // 
             // textBoxMax
             // 
-            this.textBoxMax.Location = new System.Drawing.Point(344, 490);
+            this.textBoxMax.Location = new System.Drawing.Point(248, 490);
             this.textBoxMax.Name = "textBoxMax";
             this.textBoxMax.Size = new System.Drawing.Size(108, 20);
             this.textBoxMax.TabIndex = 3;
@@ -70,7 +72,7 @@
             // labelMax
             // 
             this.labelMax.AutoSize = true;
-            this.labelMax.Location = new System.Drawing.Point(308, 493);
+            this.labelMax.Location = new System.Drawing.Point(212, 493);
             this.labelMax.Name = "labelMax";
             this.labelMax.Size = new System.Drawing.Size(30, 13);
             this.labelMax.TabIndex = 4;
@@ -79,7 +81,7 @@
             // labelScale
             // 
             this.labelScale.AutoSize = true;
-            this.labelScale.Location = new System.Drawing.Point(301, 467);
+            this.labelScale.Location = new System.Drawing.Point(205, 467);
             this.labelScale.Name = "labelScale";
             this.labelScale.Size = new System.Drawing.Size(37, 13);
             this.labelScale.TabIndex = 6;
@@ -87,7 +89,7 @@
             // 
             // textBoxScale
             // 
-            this.textBoxScale.Location = new System.Drawing.Point(344, 464);
+            this.textBoxScale.Location = new System.Drawing.Point(248, 464);
             this.textBoxScale.Name = "textBoxScale";
             this.textBoxScale.Size = new System.Drawing.Size(108, 20);
             this.textBoxScale.TabIndex = 5;
@@ -95,7 +97,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(459, 493);
+            this.label1.Location = new System.Drawing.Point(363, 493);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(51, 13);
             this.label1.TabIndex = 8;
@@ -103,7 +105,7 @@
             // 
             // textBoxMiddleY
             // 
-            this.textBoxMiddleY.Location = new System.Drawing.Point(516, 490);
+            this.textBoxMiddleY.Location = new System.Drawing.Point(420, 490);
             this.textBoxMiddleY.Name = "textBoxMiddleY";
             this.textBoxMiddleY.Size = new System.Drawing.Size(121, 20);
             this.textBoxMiddleY.TabIndex = 7;
@@ -111,7 +113,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(459, 467);
+            this.label2.Location = new System.Drawing.Point(363, 467);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(51, 13);
             this.label2.TabIndex = 10;
@@ -119,7 +121,7 @@
             // 
             // textBoxMiddleX
             // 
-            this.textBoxMiddleX.Location = new System.Drawing.Point(516, 464);
+            this.textBoxMiddleX.Location = new System.Drawing.Point(420, 464);
             this.textBoxMiddleX.Name = "textBoxMiddleX";
             this.textBoxMiddleX.Size = new System.Drawing.Size(121, 20);
             this.textBoxMiddleX.TabIndex = 9;
@@ -128,7 +130,7 @@
             // 
             this.comboBoxColors.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxColors.FormattingEnabled = true;
-            this.comboBoxColors.Location = new System.Drawing.Point(156, 489);
+            this.comboBoxColors.Location = new System.Drawing.Point(78, 491);
             this.comboBoxColors.Name = "comboBoxColors";
             this.comboBoxColors.Size = new System.Drawing.Size(121, 21);
             this.comboBoxColors.TabIndex = 11;
@@ -136,17 +138,39 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(91, 492);
+            this.label3.Location = new System.Drawing.Point(13, 494);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(59, 13);
             this.label3.TabIndex = 12;
             this.label3.Text = "Color Filter:";
             // 
+            // buttonTeeth
+            // 
+            this.buttonTeeth.Location = new System.Drawing.Point(78, 462);
+            this.buttonTeeth.Name = "buttonTeeth";
+            this.buttonTeeth.Size = new System.Drawing.Size(51, 23);
+            this.buttonTeeth.TabIndex = 13;
+            this.buttonTeeth.Text = "Teeth";
+            this.buttonTeeth.UseVisualStyleBackColor = true;
+            this.buttonTeeth.Click += new System.EventHandler(this.buttonTeeth_Click);
+            // 
+            // buttonSpace
+            // 
+            this.buttonSpace.Location = new System.Drawing.Point(135, 462);
+            this.buttonSpace.Name = "buttonSpace";
+            this.buttonSpace.Size = new System.Drawing.Size(64, 23);
+            this.buttonSpace.TabIndex = 14;
+            this.buttonSpace.Text = "Space";
+            this.buttonSpace.UseVisualStyleBackColor = true;
+            this.buttonSpace.Click += new System.EventHandler(this.buttonSpace_Click);
+            // 
             // MandelForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(650, 522);
+            this.ClientSize = new System.Drawing.Size(555, 522);
+            this.Controls.Add(this.buttonSpace);
+            this.Controls.Add(this.buttonTeeth);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.comboBoxColors);
             this.Controls.Add(this.label2);
@@ -182,6 +206,8 @@
         private System.Windows.Forms.TextBox textBoxMiddleX;
         private System.Windows.Forms.ComboBox comboBoxColors;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button buttonTeeth;
+        private System.Windows.Forms.Button buttonSpace;
     }
 }
 

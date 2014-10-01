@@ -23,10 +23,8 @@ namespace Mandelbrot
         public override Color get(int n, int max)
         {
             if (n == MandelNumber.INVALID)
-                return Color.Black;
-            double scale = 255 / max;
-            n = (int)(scale * n);
-            return Color.FromArgb(255 - n, 0, 0, 50);
+                return Color.White;
+            return Color.FromArgb(255 - n % 256, 0, 0, 50);
         }
     }
 

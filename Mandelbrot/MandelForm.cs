@@ -118,5 +118,25 @@ namespace Mandelbrot
                 MessageBox.Show("Invalid format used!", "Error");
             }
         }
+
+        private void buttonTeeth_Click(object sender, EventArgs e)
+        {
+            scale = 6.103515625E-07;
+            maxLoop = 1000;
+            middle = new MandelPoint(-1.63213623046875, -3.662109375E-06);
+            comboBoxColors.SelectedItem = comboBoxColors.Items[0];
+            fillTextFields();
+            refreshImage();
+        }
+
+        private void buttonSpace_Click(object sender, EventArgs e)
+        {
+            scale = 3.0517578125E-07;
+            maxLoop = 1000;
+            middle = new MandelPoint(-1.6320947265625, -4.7607421875E-05);
+            comboBoxColors.SelectedItem = comboBoxColors.Items[1];
+            fillTextFields();
+            refreshImage();
+        }
     }
 }
