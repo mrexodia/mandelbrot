@@ -7,25 +7,10 @@ using System.Drawing;
 
 namespace Mandelbrot
 {
-    //Class (with methods) that describes color in a Mandelbrot image
+    //Abstract class that describes color in a Mandelbrot image
     public abstract class MandelColor
     {
-        public abstract Color get(int n, int max);
-    }
-
-    public class BlueAlpha : MandelColor
-    {
-        public override string ToString()
-        {
-            return "Transparent Blue";
-        }
-
-        public override Color get(int n, int max)
-        {
-            if (n == MandelNumber.INVALID)
-                return Color.White;
-            return Color.FromArgb(255 - n % 256, 0, 0, 50);
-        }
+        public abstract Color get(int n);
     }
 
     public class RandomColor : MandelColor
@@ -35,12 +20,27 @@ namespace Mandelbrot
             return "Pseudo-Random";
         }
 
-        public override Color get(int n, int max)
+        public override Color get(int n)
         {
             if (n == MandelNumber.INVALID)
                 return Color.Black;
             Random ran = new Random(n);
             return Color.FromArgb(ran.Next(0, 255), ran.Next(0, 255), ran.Next(0, 255));
+        }
+    }
+
+    public class BlueAlpha : MandelColor
+    {
+        public override string ToString()
+        {
+            return "Transparent Blue";
+        }
+
+        public override Color get(int n)
+        {
+            if (n == MandelNumber.INVALID)
+                return Color.White;
+            return Color.FromArgb(255 - n % 256, 0, 0, 50);
         }
     }
 
@@ -51,21 +51,22 @@ namespace Mandelbrot
             return "RGB";
         }
 
-        public override Color get(int n, int max)
+        public override Color get(int n)
         {
             if (n == MandelNumber.INVALID)
                 return Color.Black;
             Color result = Color.Black;
-            switch(n%3)
+            int rgb = (n % 16 + 1) * 16 - 1;
+            switch (n % 3)
             {
                 case 0: //red
-                    result = Color.Red;
+                    result = Color.FromArgb(rgb, 0, 0);
                     break;
                 case 1: //green
-                    result = Color.Green;
+                    result = Color.FromArgb(0, rgb, 0);
                     break;
                 case 2: //blue
-                    result = Color.Blue;
+                    result = Color.FromArgb(0, 0, rgb);
                     break;
             }
             return result;
@@ -79,11 +80,44 @@ namespace Mandelbrot
             return "Fire";
         }
 
-        public override Color get(int n, int max)
+        public override Color get(int n)
+        {
+            if (n == MandelNumber.INVALID)
+                return Color.OrangeRed;
+            return Color.FromArgb(n % 256, 0, 0);
+        }
+    }
+
+    public class Green : MandelColor
+    {
+        public override string ToString()
+        {
+            return "Green";
+        }
+
+        public override Color get(int n)
         {
             if (n == MandelNumber.INVALID)
                 return Color.Black;
-            return Color.FromArgb(n % 256, 0, 0);
+            List<Color> greens = new List<Color> { Color.DarkGreen, Color.DarkOliveGreen, Color.DarkSeaGreen, Color.ForestGreen, Color.Green, Color.GreenYellow, Color.LawnGreen, Color.LightGreen, Color.LightSeaGreen, Color.LimeGreen, Color.MediumSeaGreen, Color.PaleGreen, Color.SeaGreen, Color.SpringGreen, Color.YellowGreen };
+            return greens[n % greens.Count];
+        }
+    }
+
+    public class BlackWhite : MandelColor
+    {
+        public override string ToString()
+        {
+            return "Black & White";
+        }
+
+        public override Color get(int n)
+        {
+            if (n == MandelNumber.INVALID)
+                return Color.Black;
+            Random ran = new Random(n);
+            int rgb = ran.Next(0, 255);
+            return Color.FromArgb(rgb, rgb, rgb);
         }
     }
 }

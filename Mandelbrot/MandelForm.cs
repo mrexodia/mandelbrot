@@ -29,6 +29,8 @@ namespace Mandelbrot
             colorList.Add(new BlueAlpha());
             colorList.Add(new RedGreenBlue());
             colorList.Add(new Fire());
+            colorList.Add(new Green());
+            colorList.Add(new BlackWhite());
             foreach (MandelColor color in colorList)
                 comboBoxColors.Items.Add(color.ToString());
             comboBoxColors.SelectedItem = comboBoxColors.Items[0];
