@@ -42,9 +42,6 @@ namespace Mandelbrot
             mandelPanel.MouseClick += mandelPanel_MouseClick;
             mandelPanel.MouseMove += mandelPanel_MouseMove;
             comboBoxColors.SelectedIndexChanged += comboBoxColors_SelectedIndexChanged;
-
-            MandelNumber asd = new MandelNumber(100);
-            this.Text = asd.calculate(new MandelPoint(0.5, 0.8)).ToString();
         }
 
         void comboBoxColors_SelectedIndexChanged(object sender, EventArgs e)
