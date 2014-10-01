@@ -49,7 +49,7 @@ namespace Mandelbrot
                 for (int y = 0; y < height; y++)
                 {
                     int n = mandelPointToNumber(pixelToMandelPoint(x, y));
-                    mandelBitmap.SetPixel(x, y, color.get(n, maxLoop));
+                    mandelBitmap.SetPixel(x, y, color.get(n));
                 }
             }
 
