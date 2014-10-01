@@ -17,8 +17,8 @@ namespace Mandelbrot
         Bitmap mandelBitmap;
         int maxLoop = 100;
         double scale = 0.01;
-        List<MandelState> stateList = new List<MandelState>();
-        List<MandelColor> colorList = new List<MandelColor>();
+        List<MandelState> stateList = new List<MandelState>(); // list to save textbox-settings
+        List<MandelColor> colorList = new List<MandelColor>(); // list for all possible colorfilters
 
         public MandelForm()
         {
@@ -45,6 +45,7 @@ namespace Mandelbrot
             comboBoxColors.SelectedIndexChanged += comboBoxColors_SelectedIndexChanged;
         }
 
+        // refreshes the image when using combobox
         void comboBoxColors_SelectedIndexChanged(object sender, EventArgs e)
         {
             refreshImage();
@@ -84,6 +85,7 @@ namespace Mandelbrot
                 if (stateList.Count == 0)
                     return; //don't refresh when there is no previous state
 
+                // loads the previous settings in textfields
                 scale = stateList.Last().scale;
                 middle = stateList.Last().middle;
                 maxLoop = stateList.Last().maxLoop;
@@ -101,11 +103,13 @@ namespace Mandelbrot
             this.Text = String.Format("({0}, {1}): {2}", mandelPoint.a, mandelPoint.b, n);
         }
 
+        // drawing the actual mandelbrot
         void mandelPanel_Paint(object sender, PaintEventArgs e)
         {
             e.Graphics.DrawImage(mandelBitmap, 0, 0);
         }
 
+        // method for adjusting settings when clicking 'refresh'
         private void buttonRefresh_Click(object sender, EventArgs e)
         {
             try
@@ -117,10 +121,11 @@ namespace Mandelbrot
             }
             catch (Exception)
             {
-                MessageBox.Show("Invalid format used!", "Error");
+                MessageBox.Show("Invalid format used!", "Error"); // in case input is not a number
             }
         }
 
+        // methods for examples
         private void buttonTeeth_Click(object sender, EventArgs e)
         {
             scale = 6.103515625E-07;

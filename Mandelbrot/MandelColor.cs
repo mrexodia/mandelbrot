@@ -7,7 +7,7 @@ using System.Drawing;
 
 namespace Mandelbrot
 {
-    //Class that describes color in a Mandelbrot image
+    //Class (with methods) that describes color in a Mandelbrot image
     public abstract class MandelColor
     {
         public abstract Color get(int n, int max);

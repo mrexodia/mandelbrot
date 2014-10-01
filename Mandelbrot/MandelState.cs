@@ -8,6 +8,7 @@ namespace Mandelbrot
 {
     class MandelState
     {
+        // the state of the mandelimage with 3 variables
         public MandelState(MandelPoint middle, double scale, int maxLoop)
         {
             this.middle = middle;

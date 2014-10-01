@@ -17,6 +17,7 @@ namespace Mandelbrot
 
         public MandelImage(int width, int height, MandelPoint middle, double scale, int maxLoop = 100)
         {
+            // properties of the image
             this.width = width;
             this.height = height;
             this.middle = middle;
