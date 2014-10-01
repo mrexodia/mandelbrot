@@ -27,6 +27,7 @@ namespace Mandelbrot
             //add color filters
             colorList.Add(new RandomColor());
             colorList.Add(new BlueAlpha());
+            colorList.Add(new RedGreenBlue());
             foreach (MandelColor color in colorList)
                 comboBoxColors.Items.Add(color.ToString());
             comboBoxColors.SelectedItem = comboBoxColors.Items[0];
@@ -41,6 +42,9 @@ namespace Mandelbrot
             mandelPanel.MouseClick += mandelPanel_MouseClick;
             mandelPanel.MouseMove += mandelPanel_MouseMove;
             comboBoxColors.SelectedIndexChanged += comboBoxColors_SelectedIndexChanged;
+
+            MandelNumber asd = new MandelNumber(100);
+            this.Text = asd.calculate(new MandelPoint(0.5, 0.8)).ToString();
         }
 
         void comboBoxColors_SelectedIndexChanged(object sender, EventArgs e)

@@ -43,4 +43,32 @@ namespace Mandelbrot
             return Color.FromArgb(ran.Next(0, 255), ran.Next(0, 255), ran.Next(0, 255));
         }
     }
+
+    public class RedGreenBlue : MandelColor
+    {
+        public override string ToString()
+        {
+            return "RGB";
+        }
+
+        public override Color get(int n, int max)
+        {
+            if (n == MandelNumber.INVALID)
+                return Color.Black;
+            Color result = Color.Black;
+            switch(n%3)
+            {
+                case 0: //red
+                    result = Color.Red;
+                    break;
+                case 1: //green
+                    result = Color.Green;
+                    break;
+                case 2: //blue
+                    result = Color.Blue;
+                    break;
+            }
+            return result;
+        }
+    }
 }
