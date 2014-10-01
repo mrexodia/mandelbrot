@@ -32,7 +32,7 @@ namespace Mandelbrot
             comboBoxColors.SelectedItem = comboBoxColors.Items[0];
 
             //initialize variables
-            middle = new MandelPoint();
+            middle = new MandelPoint(0, 0);
             refreshImage();
             fillTextFields();
 

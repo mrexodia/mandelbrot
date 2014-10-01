@@ -26,7 +26,7 @@ namespace Mandelbrot
         //calculate the mandel number for a point 'pt'
         public int calculate(MandelPoint point)
         {
-            MandelPoint basePoint = new MandelPoint();
+            MandelPoint basePoint = new MandelPoint(0, 0);
             for (int i = 0; i < maxLoop; i++)
             {
                 basePoint = transform(basePoint, point.a, point.b);

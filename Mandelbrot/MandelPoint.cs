@@ -12,7 +12,7 @@ namespace Mandelbrot
         public double a;
         public double b;
 
-        public MandelPoint(double a = 0, double b = 0)
+        public MandelPoint(double a, double b)
         {
             this.a = a;
             this.b = b;
