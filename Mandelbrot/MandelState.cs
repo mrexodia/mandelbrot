@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Mandelbrot
 {
-    struct MandelState
+    class MandelState
     {
         public MandelState(MandelPoint middle, double scale, int maxLoop)
         {
