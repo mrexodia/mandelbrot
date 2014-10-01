@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace Mandelbrot
 {
-    public partial class Form1 : Form
+    public partial class MandelForm : Form
     {
         MandelPoint middle;
         MandelImage mandelImage;
@@ -20,7 +20,7 @@ namespace Mandelbrot
         List<MandelState> stateList = new List<MandelState>();
         List<MandelColor> colorList = new List<MandelColor>();
 
-        public Form1()
+        public MandelForm()
         {
             InitializeComponent();
 

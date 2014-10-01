@@ -1,6 +1,6 @@
 ﻿namespace Mandelbrot
 {
-    partial class Form1
+    partial class MandelForm
     {
         /// <summary>
         /// Required designer variable.
